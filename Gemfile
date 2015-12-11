@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass'
 gem 'quiet_assets'
 gem 'bcrypt', '~> 3.1.7'
+gem 'aasm'
 
 group :development, :test do
   gem 'byebug'

@@ -1,7 +1,6 @@
 <h1>All Auctions</h1>
-<% @auction.each do |a| %>
-  <%= a.title %>
-  <%= a.details %>
-  <%= a.ends_on %>
-  <%= a.reserve_price %>
-<% end %>
+<ul>
+  <% @auction.each do |a| %>
+    <p><%= link_to "#{a.title}", auction_path(a) %></p>
+  <% end %>
+</ul>

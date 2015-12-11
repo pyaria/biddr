@@ -6,6 +6,22 @@ class Auction < ActiveRecord::Base
   validates :reserve_price, presence: true
 
   belongs_to :user
+  has_many :bids, dependent: :nullify
+  has_many :bidding_users, through: :bids, source: :user
+
+  include AASM
+
+  aasm :whiny_transitions => false do
+    state :published, initial: true
+    state :reserve_met
+    state :won
+    state :cancelled
+    state :reserve_not_met
+
+    event :bid_over do
+      transitions from: :published, to: :reserve_met
+    end
+  end
 
   private
 

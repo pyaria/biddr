@@ -10,11 +10,10 @@ class AuctionsController < ApplicationController
   end
 
   def create
-    @auction = Auction.new params.require(:auction).permit([:title,
+    @auction = current_user.auctions.new params.require(:auction).permit([:title,
                                                             :details,
                                                             :ends_on,
                                                             :reserve_price])
-    @auction.user = current_user
     if @auction.save
       redirect_to auction_path(@auction)
     else
@@ -24,5 +23,7 @@ class AuctionsController < ApplicationController
 
   def show
     @auction = Auction.find params[:id]
+    @bid = Bid.new
+    @bids = @auction.bids.order("created_at desc")
   end
 end
