@@ -1,0 +1,7 @@
+<h1>All Auctions</h1>
+<% @auction.each do |a| %>
+  <%= a.title %>
+  <%= a.details %>
+  <%= a.ends_on %>
+  <%= a.reserve_price %>
+<% end %>

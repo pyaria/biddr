@@ -59,16 +59,17 @@ RSpec.describe AuctionsController, type: :controller do
           expect(Auction.last.user).to eq(user)
         end
 
-      #   it "redirects to campaign show page" do
-      #     post :create, campaign: valid_params
-      #     expect(response).to redirect_to(campaign_path(Campaign.last))
-      #   end
-      # end
-      # context "with invalid parameters" do
-      #   def request_with_invalid_title
-      #     post :create, campaign: valid_params.merge({title: nil})
-      #   end
-      #
+        it "redirects to campaign show page" do
+          post :create, auction: valid_params
+          expect(response).to redirect_to(auction_path(Auction.last))
+        end
+      end
+      context "with invalid parameters" do
+        # def request_with_invalid_title
+        #   post :create, auction: valid_params.merge({title: nil})
+        #   expect(response).to render_template(:new)
+        # end
+
       #   it "doesn't create a campaign record in the database" do
       #     # expect { request_with_invalid_title }.not_to change { Campaign.count }
       #     before_count = Campaign.count
@@ -81,8 +82,8 @@ RSpec.describe AuctionsController, type: :controller do
       #     request_with_invalid_title
       #     expect(response).to render_template(:new)
       #   end
-      end
 
-  end
+      end
+    end
   end
 end

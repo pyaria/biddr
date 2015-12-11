@@ -5,6 +5,8 @@ class Auction < ActiveRecord::Base
   validate :future_event
   validates :reserve_price, presence: true
 
+  belongs_to :user
+
   private
 
   def future_event

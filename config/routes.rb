@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
-  resources :auctions, only: [:new, :create]
+  root "auctions#index"
+  resources :auctions, only: [:new, :create, :show]
   resources :sessions, only: [:new]
+  resources :users, only: [:new, :create]
 end
