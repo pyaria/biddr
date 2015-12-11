@@ -7,7 +7,7 @@ RSpec.describe BidsController, type: :controller do
   describe "#create" do
     context "with user not signed in" do
       it "redirects to user sign in page" do
-        get :new
+        post :create, auction_id: auction, bid: {amount: 10}
         expect(response).to redirect_to(new_session_path)
       end
     end
