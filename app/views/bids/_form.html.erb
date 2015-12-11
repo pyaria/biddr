@@ -1,0 +1,5 @@
+<%= form_for [@auction, @bid], remote: true do |b| %>
+  <%= b.label :amount %>
+  <%= b.text_field :amount %>
+  <%= b.submit data: {disable_with: "Bidding"} %>
+<% end %>

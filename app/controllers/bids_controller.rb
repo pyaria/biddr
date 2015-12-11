@@ -8,15 +8,19 @@ class BidsController < ApplicationController
     else
       @bid = current_user.bids.new(params.require(:bid).permit([:amount]))
       @bid.auction = @auction
-      if @bid.save
-        if @bid.amount > @auction.reserve_price
-          @auction.bid_over
-          @auction.reserve_price = @bid.amount
-          @auction.save
+      respond_to do |format|
+        if @bid.save
+          if @bid.amount > @auction.reserve_price
+            @auction.bid_over
+            @auction.reserve_price = @bid.amount
+            @auction.save
+          end
+          format.js { render :bid_success, bid: @bid }
+          format.html { redirect_to auction_path(@auction), notice: "Bidded!" }
+        else
+
+          format.html { redirect_to auction_path(@auction), alert: "Unable to bid!" }
         end
-        redirect_to auction_path(@auction), notice: "Bidded!"
-      else
-        redirect_to auction_path(@auction), alert: "Unable to bid!"
       end
     end
   end

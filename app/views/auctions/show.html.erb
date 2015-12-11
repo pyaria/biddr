@@ -1,16 +1,18 @@
 <h1><%= @auction.title %> Auction</h1>
-<p>Details: <%= @auction.details %></p>
-<p>End date: <%= @auction.ends_on %></p>
-<p>Reserve Price: <%= @auction.reserve_price %></p>
+<div id="auction_details">
+  <p>Details: <%= @auction.details %></p>
+  <p>End date: <%= @auction.ends_on %></p>
+  <p>Reserve Price: <%= @auction.reserve_price %></p>
+</div>
 <hr>
 <h1>Place a Bid!</h1>
-<%= form_for [@auction, @bid] do |b| %>
-  <%= b.label :amount %>
-  <%= b.text_field :amount %>
-  <%= b.submit %>
-<% end %>
+<div id="bid_form">
+  <%= render "/bids/form", bid: @bid %>
+</div>
 <hr>
 <h1>All Bids So Far</h1>
-<% @bids.each do |bid| %>
-  <p><%= bid.amount %> - <%= bid.user.full_name %></p>
-<% end %>
+<div id="auction_bids">
+  <% @bids.each do |bid| %>
+    <%= render "/bids/bids", bid: bid %>
+  <% end %>
+</div>
